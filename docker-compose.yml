@@ -3,6 +3,6 @@ version: "3.0"
 services: 
   web:
     build: .
-    container_name: nginx-vue
+    container_name: nginx-brunch
     ports:
       - "8080:80"
