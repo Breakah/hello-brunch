@@ -4,5 +4,5 @@ default:
 build-job:
     stage: build
     script:
-        - eho "Hello GitLab"
+        - echo "Hello GitLab"
 
