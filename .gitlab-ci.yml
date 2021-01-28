@@ -5,5 +5,13 @@ build-job:
     stage: build
     script:
         - echo "Build brunch"
+        - yarn
+        - yarn build
+
+deploy-job:
+    stage: deploy
+    script:
+        - echo "Deploy brunch"
+
 
 
