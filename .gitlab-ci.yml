@@ -6,9 +6,5 @@ build-job:
     script:
         - echo "Build brunch"
         - docker-compose build
-deploy-job:
-    stage: Deploy
-    script:
-        - echo "Deploy brunch"
-        - docker-compose up -d
+
 
