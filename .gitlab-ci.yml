@@ -1,3 +1,8 @@
+stages:
+    - build
+    - test
+    - deploy
+    
 default: 
     image: node:latest
 
@@ -7,6 +12,11 @@ build-job:
         - echo "Build brunch"
         - yarn
         - yarn build
+
+test-job:
+    stage: test
+    script:
+        - yarn test
 
 deploy-job:
     stage: deploy
