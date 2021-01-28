@@ -1,0 +1,8 @@
+default: 
+    image: node:lasted
+
+build-job:
+    stage: build
+    script:
+        - eho "Hello GitLab"
+
