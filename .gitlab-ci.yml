@@ -1,5 +1,5 @@
 default: 
-    image: node:lasted
+    image: node:latest
 
 build-job:
     stage: build
