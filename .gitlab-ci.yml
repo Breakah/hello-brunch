@@ -2,7 +2,7 @@ stages:
     - build
     - test
     - deploy
-    
+
 default: 
     image: node:latest
 
@@ -16,7 +16,7 @@ build-job:
 test-job:
     stage: test
     script:
-        - yarn test
+        - echo "test"
 
 deploy-job:
     stage: deploy
