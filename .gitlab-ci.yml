@@ -9,5 +9,6 @@ build-job:
 deploy-job:
     stage: Deploy
     script:
+        - echo "Deploy brunch"
         - docker-compose up -d
 
