@@ -4,5 +4,10 @@ default:
 build-job:
     stage: build
     script:
-        - echo "Hello GitLab"
+        - echo "Build brunch"
+        - docker-compose build
+deploy-job:
+    stage: Deploy
+    script:
+        - docker-compose up -d
 
