@@ -14,11 +14,12 @@ pipeline {
         }
 	stage('Trivy') {
             steps {
-                sh 'trivy image --format json --output trivy-results.json hellobrunchjenkinfile_web:latest'
+                sh 'trivy filesystem -f json -o trivy-fs-json'
+                sh 'trivy image --format json --output trivy-image.json hellobrunchjenkinfile_web:latest'
             }
             post {
                 always {
-                	recordIssues enabledForFailure: true, tool: trivy(pattern: 'trivy-results.json')
+                	recordIssues enabledForFailure: true, aggregatingResults:true tool: trivy(pattern: 'trivy-*.json')
                 }
             }
         }
