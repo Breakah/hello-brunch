@@ -14,7 +14,7 @@ pipeline {
         }
 	stage('Trivy') {
             steps {
-                sh 'trivy image --format json --output trivy-results.json nginx-brunch'
+                sh 'trivy image --format json --output trivy-results.json hellobrunchjenkinfile_web:latest'
             }
             post {
                 always {
