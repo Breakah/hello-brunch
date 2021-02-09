@@ -8,11 +8,21 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                //Se especifica el git con la rama main(por defecto en github)
                 git url:'https://github.com/Breakah/hello-brunch.git',branch:'main' 
                 sh 'docker-compose build'
             }
         }
+	stage('Trivy') {
+            steps {
+                sh 'trivy image --format json --output trivy-results.json nginx-brunch'
+            }
+            post {
+                always {
+                	recordIssues enabledForFailure: true, tool: trivy(pattern: 'trivy-results.json')
+                }
+            }
+        }
+		
         stage('Deploy') {
             steps {
                 sh 'docker-compose up -d'
