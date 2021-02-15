@@ -8,25 +8,17 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                git url:'https://github.com/Breakah/hello-brunch.git',branch:'main' 
                 sh 'docker-compose build'
             }
         }
-	stage('Trivy') {
-            steps {
-                sh 'trivy filesystem -f json -o trivy-fs-json'
-                sh 'trivy image --format json --output trivy-image.json hellobrunchjenkinfile_web:latest'
-            }
-            post {
-                always {
-                	recordIssues enabledForFailure: true, aggregatingResults:true, tool: trivy(pattern: 'trivy-*.json')
-                }
-            }
-        }
+
 		
-        stage('Deploy') {
+        stage('Publish') {
             steps {
-                sh 'docker-compose up -d'
+                withDockerRegistry([credentialsId:"gitlab_registry",url:"http://10.250.8.1:5050"]){
+                    sh "docker tag hello-brunch:latest 10.250.8.1:5050/root/hello-brunch:latest"
+                    sh "docker push 10.250.8.1:5050/root/hello-brunch:latest"
+                }
             }
         }
     }
