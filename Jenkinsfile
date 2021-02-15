@@ -17,11 +17,19 @@ pipeline {
                 withDockerRegistry([credentialsId:"gitlab_registry",url:"http://10.250.8.1:5050"]){
                     sh "docker tag nginx-brunch:latest 10.250.8.1:5050/root/hello-brunch:BUILD-1.${BUILD_NUMBER}"
                     sh "docker push 10.250.8.1:5050/root/hello-brunch:BUILD-1.${BUILD_NUMBER}"   
-                                
+                    sh "docker tag nginx-brunch:latest 10.250.8.1:5050/root/hello-brunch:latest"
+                    sh "docker push 10.250.8.1:5050/root/hello-brunch:latest"                                
                     sshagent(credentials:['SSH_Git']){
                         sh 'git tag BUILD-1.${BUILD_NUMBER}'
                         sh 'git push --tags'
                     }
+                }
+            }
+        }
+        stage('Deploy'){
+            steps{
+                withDockerRegistry([credentialsId:"deploy_ssh",url:"http://10.250.8.1:5050"]){
+                    sh "docker-compose pull && docker-compose up -d"                  
                 }
             }
         }
