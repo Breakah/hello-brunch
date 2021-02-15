@@ -5,3 +5,4 @@ docker-compose.yml
 .dockerignore
 node_modules/
 public/
+Jenkinsfile
