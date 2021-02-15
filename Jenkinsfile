@@ -19,6 +19,8 @@ pipeline {
                     sh "docker tag nginx-brunch:latest 10.250.8.1:5050/root/hello-brunch:BUILD-1.${BUILD_NUMBER}"
                     sh "docker push 10.250.8.1:5050/root/hello-brunch:BUILD-1.${BUILD_NUMBER}"
                 }
+                sh 'git tag BUILD-1.${BUILD_NUMBER}'
+                sh 'git push origins registry --tags'
             }
         }
     }
