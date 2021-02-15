@@ -28,8 +28,8 @@ pipeline {
         }
         stage('Deploy'){
             steps{
-                withDockerRegistry([credentialsId:"deploy_ssh",url:"http://10.250.8.1:5050"]){
-                    sh "docker-compose pull && docker-compose up -d"                  
+                sshagent(credentials:['deploy_ssh']){
+                    sh "ssh -t -o "StrictHostKeyChecking no" deploy@10.250.8.1 'docker-compose pull && docker-compose up -d'"                  
                 }
             }
         }
