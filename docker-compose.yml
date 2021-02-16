@@ -2,7 +2,8 @@ version: "3.0"
 
 services: 
   web:
-    build: .
-    image: nginx-brunch
+    image: 10.250.8.1:5050/root/nginx-brunch
     ports:
-      - "8080:80"
+      - "80:80"
+    deploy:
+      replicas: 3
