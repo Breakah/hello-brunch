@@ -2,7 +2,7 @@ version: "3.0"
 
 services: 
   web:
-    image: image: 10.250.8.1:5050/root/hello-brunch:latest
+    image: 10.250.8.1:5050/root/hello-brunch:latest
     ports:
       - "80:80"
     logging:
