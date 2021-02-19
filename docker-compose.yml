@@ -2,12 +2,12 @@ version: "3.0"
 
 services: 
   web:
-    image: 10.250.8.1:5050/root/hello-brunch:latest
+    image: hello-brunch
     ports:
       - "80:80"
     logging:
-      driver: syslog
+      driver: loki
       options:
-        syslog-address: "tcp://10.250.8.1:5000"
-        syslog-format: "rfc5424"
-        tag: "hello-brunch"
+        loki-url: "http://10.250.8.1:3100/loki/api/v1/push"
+        loki-retries: 5 
+        loki-batch-size: 400
